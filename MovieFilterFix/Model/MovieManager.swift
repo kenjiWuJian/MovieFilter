@@ -12,64 +12,16 @@ protocol MovieManagerDelegate{
     func didFailWithError(error:Error)
 }
 struct MovieManager {
-    /*The current query keyword has the limitation that the results are limited to 500 pages 10000 results
-     I tried to seperate url to multiple querys with different query name in order to get all the movies with the commented url, however, there are other issues I can not solve: the current design with delegation, if multiple request were triggered, how can I know which comes first? How to know the data is from which query? So in order to make it simple and focus on other important features, instead only provide 1 query url, so the pages are fix value 500, results are fixed 10000 :(
-         I hope someone can tell me how to solve this issue
-    */
-    let movieURL =
-    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&primary_release_date.gte=2017-01-01&primary_release_date.lte=2018-12-31&"
-    /*let movieURL2018S3 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-09-01&primary_release_date.lte=2018-12-31&page="
-    let movieURL2018S2 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-05-01&primary_release_date.lte=2018-08-31&page="
-    let movieURL2018S1 =    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-01-01&primary_release_date.lte=2018-04-30&page="
-    let movieURL2017S3 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-09-01&primary_release_date.lte=2017-12-31&page="
-    let movieURL2017S2 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-05-01&primary_release_date.lte=2017-08-31&page="
-    let movieURL2017S1 =    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-01-01&primary_release_date.lte=2017-04-30&page="
-    */
+    var movieURL = ""
+  
     var delegate:MovieManagerDelegate?
     func fetchMovie(userInput:String,page:Int)->String
     {
         let urlStr = movieURL + userInput + "&page=" + String(page)
-        return urlStr
-    }
-    /*
-    func fetchMovie2018S3(page:Int)->String
-    {
-        let urlStr = movieURL2018S3 + String(page)
+        //print(urlStr)
         return urlStr
     }
     
-    func fetchMovie2018S2(page:Int)->String
-    {
-        let urlStr = movieURL2018S2 + String(page)
-        return urlStr
-    }
-    
-    func fetchMovie2018S1(page:Int)->String
-    {
-        let urlStr = movieURL2018S1 + String(page)
-        return urlStr
-    }
-    func fetchMovie2017S3(page:Int)->String
-    {
-        let urlStr = movieURL2017S3 + String(page)
-        return urlStr
-    }
-    func fetchMovie2017S2(page:Int)->String
-    {
-        let urlStr = movieURL2017S2 + String(page)
-        return urlStr
-    }
-    func fetchMovie2017S1(page:Int)->String
-    {
-        let urlStr = movieURL2017S1 + String(page)
-        return urlStr
-    }
-    
-    */
     func performRequest(urlString:String){
             //1 Create a url
         if let url = URL(string: urlString){
@@ -158,6 +110,7 @@ struct MovieManager {
         return result
     }
     //to merge 2 result, always keep the top 10
+    //test with several pages result are ok. But I can't think a good way to trigger multiple request
     func merge2Result(movieData1:[Result],movieData2:[Result])->[Result]
     {
         let size1 = movieData1.count
@@ -230,6 +183,13 @@ struct MovieManager {
     func getTotalPage(movieData:MovieData)->Int
     {
         return movieData.total_pages
+    }
+    
+    mutating func getAppId(appId:String)
+    {
+          movieURL = "https://api.themoviedb.org/3/discover/movie?api_key="+appId
+          movieURL += "&language=en-US&primary_release_date.gte=2017-01-01&primary_release_date.lte=2018-12-31&"
+        //print(movieURL)
     }
 }
 

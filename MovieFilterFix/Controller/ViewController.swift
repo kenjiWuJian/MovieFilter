@@ -49,6 +49,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchTextField.endEditing(true)
+        idTextField.endEditing(true)
         print(searchTextField.text!)
         return true
     }
@@ -64,6 +65,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         searchTextField.text = ""
+        idTextField.text = ""
     }
     
     
@@ -73,10 +75,11 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     
    
     @IBOutlet weak var searchTextField: UITextField!
-   
-    //@IBOutlet weak var resultTable: UITableView!
-    //var totalPages:Int
-    //@IBOutlet weak var label0: UILabel!
+    @IBOutlet weak var idTextField: UITextField!
+    
+    @IBAction func idTextField(_ sender: UITextField) {
+    }
+
   
     @IBOutlet weak var resultTextView: UITextView!
     
@@ -98,7 +101,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         // Do any additional setup after loading the view.
         movieManager.delegate = self
         searchTextField.delegate = self
-        
+        //idTextField.delegate = self
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
@@ -108,30 +111,10 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         print(searchTextField.text!)
     }
     
-    
-    
-/*
-    @IBAction func resultBtn(_ sender: UIButton) {
-        print("Hello\(test(5))")
-        for index in 1...2{
-            movieManager.performRequest(urlString: movieManager.fetchMovie(page: index))
-        }
-   */
-        //movieManager.performRequest(urlString: movieManager.fetchMovie2017S1(page: 2))
-        //movieManager.performRequest(urlString: movieManager.fetchMovie2017S1(page: 3))
-        //print();
-  //  }
-/*
-    func didUpdateMovieData(movieData: MovieData) {
-        
-}
-    
-    func didFailWithError(error: Error) {
-        
+    @IBAction func Enter(_ sender: UIButton) {
+        print(idTextField.text!)
+        movieManager.getAppId(appId:idTextField.text!)
+        idTextField.endEditing(true)
     }
- */
-  
-
-    
 }
 
