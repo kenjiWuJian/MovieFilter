@@ -2,7 +2,7 @@
 //  MovieManager.swift
 //  MovieFilter
 //
-//  Created by JoannaWQ on 22/3/20.
+//  Created by Wu Jian on 22/3/20.
 //  Copyright © 2020 Wu Jian. All rights reserved.
 //
 

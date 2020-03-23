@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B47BE132428F395002021FA /* libsortLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B47BE122428F395002021FA /* libsortLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		9B718C612428481700B2E068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C602428481700B2E068 /* AppDelegate.swift */; };
 		9B718C632428481700B2E068 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C622428481700B2E068 /* SceneDelegate.swift */; };
 		9B718C652428481700B2E068 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C642428481700B2E068 /* ViewController.swift */; };
@@ -15,7 +16,6 @@
 		9B718C6D2428481A00B2E068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B718C6B2428481A00B2E068 /* LaunchScreen.storyboard */; };
 		9B718C782428481A00B2E068 /* MovieFilterFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C772428481A00B2E068 /* MovieFilterFixTests.swift */; };
 		9B718C86242849D100B2E068 /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C85242849D100B2E068 /* MovieManager.swift */; };
-		9B718C8A24284E8D00B2E068 /* sortLib.c in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C8924284E8D00B2E068 /* sortLib.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B47BE122428F395002021FA /* libsortLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsortLib.a; path = MovieFilterFix/libsortLib.a; sourceTree = "<group>"; };
 		9B718C5D2428481700B2E068 /* MovieFilterFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieFilterFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B718C602428481700B2E068 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B718C622428481700B2E068 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B47BE132428F395002021FA /* libsortLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B47BE112428F395002021FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B47BE122428F395002021FA /* libsortLib.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9B718C542428481700B2E068 = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +83,7 @@
 				9B718C762428481A00B2E068 /* MovieFilterFixTests */,
 				9B718C5E2428481700B2E068 /* Products */,
 				9B718C8724284E8D00B2E068 /* MovieFilterFix-Bridging-Header.h */,
+				9B47BE112428F395002021FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,7 +250,6 @@
 				9B718C652428481700B2E068 /* ViewController.swift in Sources */,
 				9B718C612428481700B2E068 /* AppDelegate.swift in Sources */,
 				9B718C632428481700B2E068 /* SceneDelegate.swift in Sources */,
-				9B718C8A24284E8D00B2E068 /* sortLib.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +416,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MovieFilterFix",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = kenji.MovieFilterFix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MovieFilterFix-Bridging-Header.h";
@@ -425,6 +439,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MovieFilterFix",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kenji.MovieFilterFix;
 				PRODUCT_NAME = "$(TARGET_NAME)";

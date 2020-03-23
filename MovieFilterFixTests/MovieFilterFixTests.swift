@@ -2,7 +2,7 @@
 //  MovieFilterFixTests.swift
 //  MovieFilterFixTests
 //
-//  Created by JoannaWQ on 23/3/20.
+//  Created by Wu Jian on 23/3/20.
 //  Copyright © 2020 Wu Jian. All rights reserved.
 //
 

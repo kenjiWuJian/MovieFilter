@@ -38,9 +38,9 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTF-i7-DFB">
-                                <rect key="frame" x="322" y="782" width="46" height="30"/>
+                                <rect key="frame" x="327" y="782" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Enter"/>
                                 <connections>
                                     <action selector="Enter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3WL-ti-7uc"/>
                                 </connections>

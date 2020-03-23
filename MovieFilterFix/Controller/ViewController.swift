@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  MovieFilter
 //
-//  Created by JoannaWQ on 21/3/20.
+//  Created by Wu Jian on 21/3/20.
 //  Copyright © 2020 Wu Jian. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
        var result1:[Result] = []
        var result2:[Result] = []
        var totalPages = 0
-       // var test:[String] = ["a","de","t","s","w","a","de","t","s","w"]
+    var appIdSet:Bool = false
     func didUpdateMovieData(movieData: MovieData) {
         
         result2.removeAll()
@@ -88,6 +88,9 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         {
             resultTextView.text = ""
             resultTextView.text = "Please input a correct keyword"
+        }else if result1.count == 0{
+            resultTextView.text = ""
+            resultTextView.text = "Please set app id and type search keyword first"
         }else{
             resultTextView.text = ""
             for index in 0...(result1.count-1){
@@ -105,14 +108,15 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
-        print(searchTextField.text!)
-        movieManager.performRequest(urlString:movieManager.fetchMovie(userInput:searchTextField.text!,page:1))
+        if searchTextField.text != "" {
+            movieManager.performRequest(urlString:movieManager.fetchMovie(userInput:searchTextField.text!,page:1))
         searchTextField.endEditing(true)
         print(searchTextField.text!)
+        }
     }
     
     @IBAction func Enter(_ sender: UIButton) {
-        print(idTextField.text!)
+        //print(idTextField.text!)
         movieManager.getAppId(appId:idTextField.text!)
         idTextField.endEditing(true)
     }
