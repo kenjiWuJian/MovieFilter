@@ -9,26 +9,32 @@
 import UIKit
 
 class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate {
-    var movieManager = MovieManager()
+        var movieManager = MovieManager()
        var result1:[Result] = []
        var result2:[Result] = []
+       var totalPages = 0
+   // var test:[String] = ["a","de","t","s","w","a","de","t","s","w"]
     func didUpdateMovieData(movieData: MovieData) {
+        totalPages = movieData.total_pages
+        result2.removeAll()
         result2 = movieManager.sortPage(movieData: movieData)
+        print(result2.count)
             if result1.count == 0{
                 result1 = result2
             }else{
                 result1 = movieManager.merge2Result(movieData1: result1, movieData2:result2)
             }
-            let page = movieData.page
-            print(page)
+            
+            //let page = movieData.page
+            //print(page)
             //print final result
-            if page == 100{
+            //if page == 100{
             for index in 0...result1.count-1{
                 print(result1[index].vote_average)
                 print(result1[index].title)
             }
 
-        }
+       // }
     }
     
     func didFailWithError(error: Error) {
@@ -54,18 +60,38 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     }
     
     
-
+    //@IBOutlet weak var myTableView: UITableView!
     
-   // @IBOutlet weak var searchTextField: UITextField!
+    //@IBOutlet weak var myTableView: UITableView!
+    
+   
     @IBOutlet weak var searchTextField: UITextField!
    
+    //@IBOutlet weak var resultTable: UITableView!
     //var totalPages:Int
+    //@IBOutlet weak var label0: UILabel!
+  
+    @IBOutlet weak var resultTextView: UITextView!
     
+    @IBAction func resultBtn(_ sender: UIButton) {
+        if totalPages == 500
+        {
+            resultTextView.text = ""
+            resultTextView.text = "Please input a correct keyword"
+        }else{
+            resultTextView.text = ""
+            for index in 0...(result1.count-1){
+                resultTextView.text += "\(index+1) \(result1[index].title) \(result1[index].vote_average) \(result1[index].release_date)"
+                resultTextView.text += "\n"
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         movieManager.delegate = self
         searchTextField.delegate = self
+        
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
@@ -74,6 +100,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         searchTextField.endEditing(true)
         print(searchTextField.text!)
     }
+    
     
     
 /*

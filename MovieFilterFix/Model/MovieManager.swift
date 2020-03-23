@@ -98,7 +98,7 @@ struct MovieManager {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(MovieData.self, from: movieData)
-            print(decodedData)
+            //print(decodedData)
             return decodedData
             //print(decodedData.results[0].vote_average)
             
@@ -120,6 +120,7 @@ struct MovieManager {
                 vote_average.append(Int32(movieData.results[index].vote_average*10))
             }
         }
+        print(vote_average.count)
         let pointer: UnsafeMutablePointer<Int32> = UnsafeMutablePointer(&vote_average)
         //let array = Array(UnsafeBufferPointer(start: pointer, count: size))
         //var cargs = vote_average.map { $0.flatMap { UnsafePointer<Int32>(strdup($0)) } }
@@ -130,13 +131,16 @@ struct MovieManager {
         }
         //if result >=10, keep 10 and delete the left, else keep all
         var result:[Result] = []
+        print(vote_average.count)
         if vote_average.count >= 10{
             for index in 0...9{
                 for index2 in 0...(vote_average.count-1){
                     if md.results[index2].vote_average == vote_averageDouble[index]{
                         result.append(movieData.results[index2])
+                       
                         //here do a trick to modify vote_average to a impossible value
                         md.results[index2].vote_average = 11
+                        break
                     }
                 }
             }
@@ -146,6 +150,7 @@ struct MovieManager {
                     if md.results[index2].vote_average == vote_averageDouble[index]{
                         result.append(movieData.results[index2])
                         md.results[index2].vote_average = 11
+                        break
                     }
                 }
             }
@@ -197,6 +202,7 @@ struct MovieManager {
                         result.append(mvResult[index2])
                         //here do a trick to modify vote_average to a impossible value
                         mvResult[index2].vote_average = 11
+                        break
                     }
                 }
             }
@@ -206,6 +212,7 @@ struct MovieManager {
                     if mvResult[index2].vote_average == vote_averageDouble[index]{
                         result.append(mvResult[index2])
                         mvResult[index2].vote_average = 11
+                        break
                     }
                 }
             }
@@ -218,6 +225,11 @@ struct MovieManager {
     func getCurrentPage(movieData:MovieData)->Int
     {
         return movieData.page
+    }
+    
+    func getTotalPage(movieData:MovieData)->Int
+    {
+        return movieData.total_pages
     }
 }
 
@@ -235,7 +247,7 @@ struct Result:Decodable{
     let vote_count:Int
     var vote_average:Double
     let title:String
-    let release_date:String?
+    let release_date:String
     let original_language:String?
     let original_title:String?
     let genre_ids:[Int]
