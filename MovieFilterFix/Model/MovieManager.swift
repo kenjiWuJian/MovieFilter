@@ -17,22 +17,22 @@ struct MovieManager {
          I hope someone can tell me how to solve this issue
     */
     let movieURL =
-    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&primary_release_date.gte=2017-01-01&primary_release_date.lte=2018-12-31&page="
+    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&primary_release_date.gte=2017-01-01&primary_release_date.lte=2018-12-31&"
     /*let movieURL2018S3 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-09-01&primary_release_date.lte=2018-12-31&page="
+    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-09-01&primary_release_date.lte=2018-12-31&page="
     let movieURL2018S2 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-05-01&primary_release_date.lte=2018-08-31&page="
-    let movieURL2018S1 =    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-01-01&primary_release_date.lte=2018-04-30&page="
+    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-05-01&primary_release_date.lte=2018-08-31&page="
+    let movieURL2018S1 =    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2018-01-01&primary_release_date.lte=2018-04-30&page="
     let movieURL2017S3 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-09-01&primary_release_date.lte=2017-12-31&page="
+    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-09-01&primary_release_date.lte=2017-12-31&page="
     let movieURL2017S2 =
-    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-05-01&primary_release_date.lte=2017-08-31&page="
-    let movieURL2017S1 =    "https://api.themoviedb.org/3/discover/movie?api_key=ec59bc2d09981ec41cbabf9180e8b65a&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-01-01&primary_release_date.lte=2017-04-30&page="
+    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-05-01&primary_release_date.lte=2017-08-31&page="
+    let movieURL2017S1 =    "https://api.themoviedb.org/3/discover/movie?api_key=key&language=en-US&sort_by=primary_release_date.desc&primary_release_date.gte=2017-01-01&primary_release_date.lte=2017-04-30&page="
     */
     var delegate:MovieManagerDelegate?
-    func fetchMovie(page:Int)->String
+    func fetchMovie(userInput:String,page:Int)->String
     {
-        let urlStr = movieURL + String(page)
+        let urlStr = movieURL + userInput + "&page=" + String(page)
         return urlStr
     }
     /*
@@ -98,8 +98,10 @@ struct MovieManager {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(MovieData.self, from: movieData)
+            print(decodedData)
             return decodedData
             //print(decodedData.results[0].vote_average)
+            
         }catch{
             delegate?.didFailWithError(error: error)
             return nil
