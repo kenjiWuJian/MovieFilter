@@ -88,11 +88,11 @@
 		9B718C5F2428481700B2E068 /* MovieFilterFix */ = {
 			isa = PBXGroup;
 			children = (
-				9B718C842428490D00B2E068 /* Model */,
 				9B718C602428481700B2E068 /* AppDelegate.swift */,
 				9B718C622428481700B2E068 /* SceneDelegate.swift */,
-				9B718C822428489400B2E068 /* Controller */,
+				9B718C842428490D00B2E068 /* Model */,
 				9B718C83242848FE00B2E068 /* View */,
+				9B718C822428489400B2E068 /* Controller */,
 				9B718C692428481A00B2E068 /* Assets.xcassets */,
 				9B718C6B2428481A00B2E068 /* LaunchScreen.storyboard */,
 				9B718C6E2428481A00B2E068 /* Info.plist */,
