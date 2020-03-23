@@ -13,12 +13,11 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
        var result1:[Result] = []
        var result2:[Result] = []
        var totalPages = 0
-   // var test:[String] = ["a","de","t","s","w","a","de","t","s","w"]
+       // var test:[String] = ["a","de","t","s","w","a","de","t","s","w"]
     func didUpdateMovieData(movieData: MovieData) {
-        totalPages = movieData.total_pages
+        
         result2.removeAll()
         result2 = movieManager.sortPage(movieData: movieData)
-        print(result2.count)
             if result1.count == 0{
                 result1 = result2
             }else{
@@ -33,7 +32,15 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
                 print(result1[index].vote_average)
                 print(result1[index].title)
             }
-
+        
+        /* this will crash system, no solution yet, call another thread to try?
+        if (movieData.page < movieData.total_pages) && (movieData.total_pages != 500)
+        {
+           movieManager.performRequest(urlString:movieManager.fetchMovie(userInput:searchTextField.text!,page:(movieData.page+1)))
+        }
+        */
+        totalPages = movieData.total_pages
+        
        // }
     }
     
