@@ -13,7 +13,6 @@ protocol MovieManagerDelegate{
 }
 struct MovieManager {
     var movieURL = ""
-  
     var delegate:MovieManagerDelegate?
     func fetchMovie(userInput:String,page:Int)->String
     {
@@ -21,6 +20,8 @@ struct MovieManager {
         //print(urlStr)
         return urlStr
     }
+    
+    
     
     func performRequest(urlString:String){
             //1 Create a url
@@ -110,7 +111,7 @@ struct MovieManager {
         return result
     }
     //to merge 2 result, always keep the top 10
-    //test with several pages result are ok. But I can't think a good way to trigger multiple request
+    //test with several pages result are ok. But I can't think a good way to trigger multiple request. Maybe your reqirement doesn't need to request muliple pages? Then this function is useless
     func merge2Result(movieData1:[Result],movieData2:[Result])->[Result]
     {
         let size1 = movieData1.count
@@ -174,17 +175,6 @@ struct MovieManager {
         
     }
     
-    //to get total page
-    func getCurrentPage(movieData:MovieData)->Int
-    {
-        return movieData.page
-    }
-    
-    func getTotalPage(movieData:MovieData)->Int
-    {
-        return movieData.total_pages
-    }
-    
     mutating func getAppId(appId:String)
     {
           movieURL = "https://api.themoviedb.org/3/discover/movie?api_key="+appId
@@ -216,6 +206,3 @@ struct Result:Decodable{
     let overview:String?
     let poster_path:String?
 }
-
-
-

@@ -11,29 +11,29 @@ import UIKit
 class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate {
         var movieManager = MovieManager()
        var result1:[Result] = []
-       var result2:[Result] = []
+       //var result2:[Result] = []
        var totalPages = 0
-    var appIdSet:Bool = false
+    //delete function, will be called after url request
     func didUpdateMovieData(movieData: MovieData) {
-        
-        result2.removeAll()
-        result2 = movieManager.sortPage(movieData: movieData)
+        result1.removeAll()
+        //2 buffers are designed to handle multiple requests automatically, and currently I don't have a method to handle it
+        //result2.removeAll()
+        result1 = movieManager.sortPage(movieData: movieData)
+        /*
             if result1.count == 0{
                 result1 = result2
             }else{
                 result1 = movieManager.merge2Result(movieData1: result1, movieData2:result2)
             }
+            */
             
-            //let page = movieData.page
-            //print(page)
-            //print final result
-            //if page == 100{
             for index in 0...result1.count-1{
                 print(result1[index].vote_average)
                 print(result1[index].title)
             }
         
         /* this will crash system, no solution yet, call another thread to try?
+         Here I assume you don't need me to request multiple pages
         if (movieData.page < movieData.total_pages) && (movieData.total_pages != 500)
         {
            movieManager.performRequest(urlString:movieManager.fetchMovie(userInput:searchTextField.text!,page:(movieData.page+1)))
@@ -76,18 +76,15 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var idTextField: UITextField!
-    
-    @IBAction func idTextField(_ sender: UITextField) {
-    }
-
-  
     @IBOutlet weak var resultTextView: UITextView!
     
     @IBAction func resultBtn(_ sender: UIButton) {
+        //if user input a wrong key word, the default query will be called, and result would be 500 pages and 10000 results, it is not what the user want, so don't do the query
         if totalPages == 500
         {
             resultTextView.text = ""
             resultTextView.text = "Please input a correct keyword"
+            //here in case user directly click show result button
         }else if result1.count == 0{
             resultTextView.text = ""
             resultTextView.text = "Please set app id and type search keyword first"
