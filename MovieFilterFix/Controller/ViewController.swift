@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CryptoSwift
 class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate {
         var movieManager = MovieManager()
        var result1:[Result] = []
@@ -16,6 +16,9 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     let myDefault = UserDefaults.standard
     static var apikey:String = ""
     static let myApiKey = "myApikey"
+    
+    static let key: Array<UInt8> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+    static let iv: Array<UInt8> = [1, 2, 3, 4, 5, 6, 7, 8]
     //delete function, will be called after url request
     func didUpdateMovieData(movieData: MovieData) {
         result1.removeAll()
@@ -104,8 +107,51 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         // Do any additional setup after loading the view.
         movieManager.delegate = self
         searchTextField.delegate = self
+        //load api key from user data, encrypt string
         loadAPIkey()
         movieManager.getAppId(appId:ViewController.apikey)
+        
+        
+        //test
+     /*
+        do {
+
+          //let message = Array<UInt8>(repeating: 7, count: 10)
+            ViewController.apikey = "" //during test put my real api key
+            let password: Array<UInt8> = Array(ViewController.apikey.utf8)
+            print(password)
+            //let test = ViewController.myApiKey.bytes.toHexString()
+            //print(test)
+          //let message: Array<UInt8> = test.bytes
+          
+           // print(message)
+                //let hahaha = Data(password)
+            //print(hahaha)
+            let encrypted = try ChaCha20(key: ViewController.key, iv: ViewController.iv).encrypt(password)
+            
+            //after encypt, it is ArraySlice not array
+            print(encrypted)
+            let p = encrypted.toHexString()
+            print(p)
+            let hexArray = Array<UInt8>.init(hex: p)
+            print(hexArray)
+            //let encrypedArray = Array(encrypted)
+            myDefault.set(p,forKey:ViewController.myApiKey)
+            let loadEncrypted = (myDefault.string(forKey: ViewController.myApiKey)!)
+            
+            let hexEncrypt = Array<UInt8>.init(hex:loadEncrypted)
+            let decrypted = try ChaCha20(key: ViewController.key, iv: ViewController.iv).decrypt(hexEncrypt)
+            print(decrypted)
+            if let string = String(bytes: decrypted, encoding: .utf8) {
+                print(string)
+            } else {
+                print("not a valid UTF-8 sequence")
+            }           // let result =
+        } catch {
+          print(error)
+        }
+        */
+        
         //idTextField.delegate = self
     }
     
@@ -113,7 +159,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         if searchTextField.text != "" {
             movieManager.performRequest(urlString:movieManager.fetchMovie(userInput:searchTextField.text!,page:1))
         searchTextField.endEditing(true)
-        print(searchTextField.text!)
+        //print(searchTextField.text!)
         }
     }
     
@@ -127,14 +173,39 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     }
     
     func saveAPIkey(key:String){
-        myDefault.set(key,forKey:ViewController.myApiKey)
-        print("save key\(key)")
+        
+        do{
+        let password: Array<UInt8> = Array(ViewController.apikey.utf8)
+            //print(password)
+        let encrypted = try ChaCha20(key: ViewController.key, iv: ViewController.iv).encrypt(password)
+           // print(encrypted)
+            let storeString = encrypted.toHexString()
+        
+            myDefault.set(storeString,forKey:ViewController.myApiKey)
+            //print("save key\(storeString)")
+        }catch{
+            print(error)
+        }
     }
     
     func loadAPIkey(){
-        ViewController.apikey = myDefault.string(forKey: ViewController.myApiKey)!
+        do{
+            let persistStr = myDefault.string(forKey: ViewController.myApiKey)!
+            //convert hex string to array in order to decrypt
+            let hexEncrypt = Array<UInt8>.init(hex:persistStr)
+            
+            let decrypted = try ChaCha20(key: ViewController.key, iv: ViewController.iv).decrypt(hexEncrypt)
+            if let decryptedStr = String(bytes: decrypted, encoding: .utf8) {
+                ViewController.apikey = decryptedStr
+            } else {
+                print("not a valid UTF-8 sequence")
+            }
         
-        print("load api key\(ViewController.apikey)")
+        
+       // print("load api key\(ViewController.apikey)")
+        }catch{
+            print(error)
+        }
         
     }
 }

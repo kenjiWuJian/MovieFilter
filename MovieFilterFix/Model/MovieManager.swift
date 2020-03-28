@@ -179,7 +179,7 @@ struct MovieManager {
     {
           movieURL = "https://api.themoviedb.org/3/discover/movie?api_key="+appId
           movieURL += "&language=en-US&primary_release_date.gte=2017-01-01&primary_release_date.lte=2018-12-31&"
-        print(movieURL)
+        //print(movieURL)
     }
 }
 
