@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B47BE132428F395002021FA /* libsortLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B47BE122428F395002021FA /* libsortLib.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		9B718C612428481700B2E068 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C602428481700B2E068 /* AppDelegate.swift */; };
 		9B718C632428481700B2E068 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C622428481700B2E068 /* SceneDelegate.swift */; };
 		9B718C652428481700B2E068 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C642428481700B2E068 /* ViewController.swift */; };
@@ -16,6 +15,7 @@
 		9B718C6D2428481A00B2E068 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B718C6B2428481A00B2E068 /* LaunchScreen.storyboard */; };
 		9B718C782428481A00B2E068 /* MovieFilterFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C772428481A00B2E068 /* MovieFilterFixTests.swift */; };
 		9B718C86242849D100B2E068 /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B718C85242849D100B2E068 /* MovieManager.swift */; };
+		9BF98E79242ED5A700BCDA3B /* libSort.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BF98E78242ED5A600BCDA3B /* libSort.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,7 @@
 		9B718C85242849D100B2E068 /* MovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
 		9B718C8724284E8D00B2E068 /* MovieFilterFix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MovieFilterFix-Bridging-Header.h"; sourceTree = "<group>"; };
 		9B718C8824284E8D00B2E068 /* sortLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sortLib.h; path = MovieFilterFix/sortLib.h; sourceTree = "<group>"; };
-		9B718C8924284E8D00B2E068 /* sortLib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = sortLib.c; path = MovieFilterFix/sortLib.c; sourceTree = "<group>"; };
+		9BF98E78242ED5A600BCDA3B /* libSort.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libSort.c; path = MovieFilterFix/libSort.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B47BE132428F395002021FA /* libsortLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,8 +76,8 @@
 		9B718C542428481700B2E068 = {
 			isa = PBXGroup;
 			children = (
+				9BF98E78242ED5A600BCDA3B /* libSort.c */,
 				9B718C8824284E8D00B2E068 /* sortLib.h */,
-				9B718C8924284E8D00B2E068 /* sortLib.c */,
 				9B718C5F2428481700B2E068 /* MovieFilterFix */,
 				9B718C762428481A00B2E068 /* MovieFilterFixTests */,
 				9B718C5E2428481700B2E068 /* Products */,
@@ -250,6 +249,7 @@
 				9B718C652428481700B2E068 /* ViewController.swift in Sources */,
 				9B718C612428481700B2E068 /* AppDelegate.swift in Sources */,
 				9B718C632428481700B2E068 /* SceneDelegate.swift in Sources */,
+				9BF98E79242ED5A700BCDA3B /* libSort.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

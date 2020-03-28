@@ -13,6 +13,9 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
        var result1:[Result] = []
        //var result2:[Result] = []
        var totalPages = 0
+    let myDefault = UserDefaults.standard
+    static var apikey:String = ""
+    static let myApiKey = "myApikey"
     //delete function, will be called after url request
     func didUpdateMovieData(movieData: MovieData) {
         result1.removeAll()
@@ -101,6 +104,8 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
         // Do any additional setup after loading the view.
         movieManager.delegate = self
         searchTextField.delegate = self
+        loadAPIkey()
+        movieManager.getAppId(appId:ViewController.apikey)
         //idTextField.delegate = self
     }
     
@@ -114,8 +119,23 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     
     @IBAction func Enter(_ sender: UIButton) {
         //print(idTextField.text!)
+        saveAPIkey(key: idTextField.text!)
+        //print("save key \()")
         movieManager.getAppId(appId:idTextField.text!)
+        //loadAPIkey()
         idTextField.endEditing(true)
+    }
+    
+    func saveAPIkey(key:String){
+        myDefault.set(key,forKey:ViewController.myApiKey)
+        print("save key\(key)")
+    }
+    
+    func loadAPIkey(){
+        ViewController.apikey = myDefault.string(forKey: ViewController.myApiKey)!
+        
+        print("load api key\(ViewController.apikey)")
+        
     }
 }
 
