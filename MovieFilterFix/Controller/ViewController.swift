@@ -175,7 +175,7 @@ class ViewController: UIViewController,MovieManagerDelegate,UITextFieldDelegate 
     func saveAPIkey(key:String){
         
         do{
-        let password: Array<UInt8> = Array(ViewController.apikey.utf8)
+        let password: Array<UInt8> = Array(key.utf8)
             //print(password)
         let encrypted = try ChaCha20(key: ViewController.key, iv: ViewController.iv).encrypt(password)
            // print(encrypted)
